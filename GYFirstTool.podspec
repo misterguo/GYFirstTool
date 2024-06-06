@@ -21,15 +21,15 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/18332122278/GYFirstTool'
+  s.homepage         = 'https://github.com/misterguo/GYFirstTool'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '18332122278' => '1258126099@qq.com' }
-  s.source           = { :git => 'https://github.com/18332122278/GYFirstTool.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/misterguo/GYFirstTool.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
-
+  s.ios.deployment_target = '12.0'
+  s.swift_version = '5.0'
   s.source_files = 'GYFirstTool/Classes/**/*'
   
   # s.resource_bundles = {
@@ -37,6 +37,11 @@ TODO: Add long description of the pod here.
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+   s.frameworks = 'UIKit', 'Foundation'
+   s.dependency 'Alamofire'
+   s.dependency 'KakaJSON'
+   s.dependency 'FCUUID'
+   s.dependency 'SystemServices'
+   s.dependency 'QMUIKit'
+   s.dependency 'SnapKit'
 end

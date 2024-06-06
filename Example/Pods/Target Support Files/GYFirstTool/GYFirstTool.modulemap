@@ -1,0 +1,6 @@
+framework module GYFirstTool {
+  umbrella header "GYFirstTool-umbrella.h"
+
+  export *
+  module * { export * }
+}
