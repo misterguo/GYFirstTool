@@ -454,7 +454,7 @@ public extension UIView {
         }
     }
     
-    public func addLabels(labels: [String], labelHeight: CGFloat = 20, padding: CGFloat = 5, backgroundColor:UIColor = .clear, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0, cornerRadius:CGFloat = 0, font: UIFont = UIFont.systemFont(ofSize: 16), textColor:UIColor = UIColor.black, alignment: NSTextAlignment = .center, textSpacing:CGFloat = 0, labelPadding:CGFloat = 5) {
+    func addLabels(labels: [String], labelHeight: CGFloat = 20, padding: CGFloat = 5, backgroundColor:UIColor = .clear, borderColor: UIColor = .clear, borderWidth: CGFloat = 0.0, cornerRadius:CGFloat = 0, font: UIFont = UIFont.systemFont(ofSize: 16), textColor:UIColor = UIColor.black, alignment: NSTextAlignment = .center, textSpacing:CGFloat = 0, labelPadding:CGFloat = 5) {
             var lastLabel: QMUILabel?
             var rowIndex = 0
             var rowWidth: CGFloat = 0
@@ -583,7 +583,7 @@ public extension UIView {
     }
 }
 
-extension UIColor {
+public extension UIColor {
     convenience init(hexStr: String, alpha: CGFloat = 1.0) {
         var hexString = hexStr.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -626,7 +626,7 @@ extension UIColor {
 }
 
 private var preventContinuousClickKey: UInt8 = 0
-extension UIButton {
+public extension UIButton {
     convenience init(title: String = "",
                      titleFont: UIFont = UIFont.systemFont(ofSize: 16),
                      titleColor: UIColor? = .black, image: UIImage? = nil, selectedImage:UIImage? = nil, backgroundImage: UIImage? = nil, cornerRadius:CGFloat = 0, backgroundColor: UIColor? = .clear, tag:Int = 0, isHidden:Bool = false, numberOfLines:Int = 1) {
@@ -655,7 +655,7 @@ extension UIButton {
         }
     }
 
-    open override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
+    override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         guard NSStringFromSelector(action).contains(actionContainsName) else {
             super.sendAction(action, to: target, for: event)
             return
@@ -672,7 +672,7 @@ extension UIButton {
 }
 
 @IBDesignable
-class halfButton:UIButton {
+public class halfButton:UIButton {
     override public func layoutSubviews() {
         super.layoutSubviews()
         layer.masksToBounds = true
@@ -681,10 +681,10 @@ class halfButton:UIButton {
 }
 
 @IBDesignable
-class GYTextField:UITextField, UITextFieldDelegate{
-    var itemModel: kycItemListModel?
+public class GYTextField:UITextField, UITextFieldDelegate{
+    public var itemModel: kycItemListModel?
     private var _maxLength:Int = 200
-    @IBInspectable var maxLength:Int {
+    @IBInspectable public var maxLength:Int {
         set{
             _maxLength = newValue
         }
@@ -692,7 +692,7 @@ class GYTextField:UITextField, UITextFieldDelegate{
             _maxLength
         }
     }
-    @IBInspectable var isPhone:Bool = false
+    @IBInspectable public var isPhone:Bool = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         setInitialize()
@@ -989,7 +989,7 @@ public func goodStar(type:Int) {
     if type == 2 || guidance == "1" { getOneTool().isShowGoodStar = 1 }
 }
 
-extension UISlider {
+public extension UISlider {
     @IBInspectable var thumbImage: UIImage? {
         get {
             return thumbImage(for: .normal)
@@ -1001,16 +1001,18 @@ extension UISlider {
 }
 
 @IBDesignable
-class GradientsSlider: UISlider {
-    @IBInspectable var trackHeight: CGFloat = 15 {
+open class GradientsSlider: UISlider {
+    @IBInspectable public var trackHeight: CGFloat = 15 {
         didSet {
             setNeedsDisplay()
         }
     }
-    @IBInspectable var startColor: UIColor?
-    @IBInspectable var endColor: UIColor?
+    @IBInspectable public var startColor: UIColor?
+    @IBInspectable public var endColor: UIColor?
     var startPoint: CGPoint = CGPoint(x: 0, y: 0.5)
     var endPoint: CGPoint = CGPoint(x: 1, y: 0.5)
+    private var gradientLayer: CAGradientLayer?
+    var isShow : Bool = false
     
     override public func trackRect(forBounds bounds: CGRect) -> CGRect {
         var rect = super.trackRect(forBounds: bounds)
@@ -1019,32 +1021,48 @@ class GradientsSlider: UISlider {
         return CGRect(x: bounds.origin.x + bounds.origin.y / 2, y: bounds.origin.y + bounds.height / 2 - trackHeight / 2, width: bounds.width - bounds.origin.y / 2, height: trackHeight)
     }
 
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        guard let startColor = startColor, let endColor = endColor else { return }
-        let gradientLayer = CAGradientLayer()
-        var gFrame = trackRect(forBounds: bounds)
-        gFrame.size.width -= bounds.height / 2
-        gradientLayer.frame = gFrame
-        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
-        gradientLayer.cornerRadius = trackHeight / 2
+    override public func layoutSubviews() {
+        super.layoutSubviews()
+        guard !isShow else { return }
+        isShow = true
+        updateGradientLayer()
+        
+    }
+    private func updateGradientLayer() {
+        guard let startColor = startColor, let endColor = endColor else {
+            gradientLayer?.removeFromSuperlayer()
+            gradientLayer = nil
+            return
+        }
+        let gFrame = trackRect(forBounds: bounds)
+        if gradientLayer == nil {
+            gradientLayer = CAGradientLayer()
+            gradientLayer?.frame = gFrame
+            gradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
+            gradientLayer?.startPoint = startPoint
+            gradientLayer?.endPoint = endPoint
+            gradientLayer?.cornerRadius = trackHeight / 2
+            layer.insertSublayer(gradientLayer!, at: 0)
+        } else {
+            gradientLayer?.frame = gFrame
+            gradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
+        }
         minimumTrackTintColor = UIColor.clear
         maximumTrackTintColor = UIColor.clear
-        layer.insertSublayer(gradientLayer, at: 0)
     }
 }
 
-class timeButton: UIButton {
+public class timeButton: UIButton {
+    private var timeFinishBlock:(() -> Void)?
     private var titleString: String = ""
     private var timer: Timer?
     private var countDown: Int = 0
-    public func getCodeSuccess(second: Int, display: String) {
+    public func getCodeSuccess(second: Int, display: String, block:(() -> Void)?) {
         guard second > 0 else { return }
         self.countDown = second
         self.titleString = display
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeSecond), userInfo: nil, repeats: true)
+        self.timeFinishBlock = block
     }
     @objc private func changeSecond() {
         if self.countDown <= 1 {
@@ -1052,6 +1070,7 @@ class timeButton: UIButton {
             self.timer = nil
             self.displayTitle(self.titleString)
             self.isUserInteractionEnabled = true
+            if let b = self.timeFinishBlock { b() }
         } else {
             self.isUserInteractionEnabled = false
             self.countDown = self.countDown - 1

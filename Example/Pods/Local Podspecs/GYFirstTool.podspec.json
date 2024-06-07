@@ -1,9 +1,9 @@
 {
   "name": "GYFirstTool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "A short description of GYFirstTool.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/18332122278/GYFirstTool",
+  "homepage": "https://github.com/misterguo/GYFirstTool",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,8 +12,8 @@
     "18332122278": "1258126099@qq.com"
   },
   "source": {
-    "git": "https://github.com/18332122278/GYFirstTool.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/misterguo/GYFirstTool.git",
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "12.0"

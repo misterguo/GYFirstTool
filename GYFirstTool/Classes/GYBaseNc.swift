@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class GYBaseNc: UINavigationController {
+open class GYBaseNc: UINavigationController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
