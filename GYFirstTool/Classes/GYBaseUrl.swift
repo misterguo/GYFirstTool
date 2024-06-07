@@ -118,7 +118,7 @@ public let panfootEnTipText = "If the information is wrong, please re-take and u
 public enum adjustType {
     case Aadhaar, Account, Apply, Contact, Info, Job, Liveness, Loan, Register, Pan, Question, defult
 
-    var str:String {
+    public var str:String {
         switch self {
         case .Aadhaar:
             return "ffed1l"
@@ -211,7 +211,7 @@ public let navHeight = UIApplication.shared.statusBarFrame.height + 44
 public enum buryName {
     case none,firstOpenApp, openLoginPage, loginCode, loginLoginButtonAction, homebuttonclick, livenessStartBtnAction, livenessCameraAlert, livenessCameraAlertSucc, livenessCameraAlertFail, livenessSetCAlert, livenessSetCAlertAction, livenessCameraShow, livenessCameraTakePhoto, taxSelected, taxSelectedCamera, taxCameraAlert, taxCameraAlertSucc, taxCameraAlertFail, taxCameraSettingAlert, taxCameraSetAlertAction, idfSelected, idfSelectedCamera, idfCameraAlert, idfCameraAlertSucc, idfCameraAlertFail, idfCameraSettingAlert, idfCameraSetAlertAction, idfPhotoPage, idfPhotoPageSelImg, idbSelected, idbSelectedCamera, idbCameraAlert, idbCameraAlertSucc, idbCameraAlertFail, idbCameraSettingAlert, idbCameraSetAlertAction, idbPhotoPage, idbPhotoPageSelImg, baseCameraPage, baseCameraPBackA, baseCameraTakePhoto, baseCameraPhotoSure, baseCameraPhotoAgain, taxPhotoPage, taxPhotoPageSelImg, fullpersonalinfo, personalinfobutton, fullworkinfo, workinfobutton, contactinfo, contactinfobutton, accountinfo, accountinfobutton, qusestioninfo, qusestioninfobutton, autoApply, productAmountChanged, productAmountAdd, productAmountReduce, productermChanged, productApplyAction, productLocationAlert, productLocationSucc, productLcaAlertFail, productLcaSetAlt, productLcaSetAltAct, productLcaUpdateSucc, productLcaUpdateFail, productAddressAlert, productAddressSetAltAct, productAddressSetAlt, productAddressAlertFail, productAddressUpdateSucc
     
-    var buryStr:String {
+    public var buryStr:String {
         switch self {
         case .none:
             return ""

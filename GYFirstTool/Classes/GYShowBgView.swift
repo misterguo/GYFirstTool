@@ -17,7 +17,7 @@ open class GYShowBgView: GYBaseView {
     
     var animateTime = 0.3
     private var _tapHidden:Bool = false
-    var tapHidden:Bool {
+    public var tapHidden:Bool {
         set {
             _tapHidden = newValue
             bgBtn.isEnabled = newValue
