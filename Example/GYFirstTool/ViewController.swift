@@ -41,9 +41,7 @@ class ViewController: GYBaseVc {
             make.height.equalTo(30)
         }
         let b = timeButton(title: "time", titleFont: FontMedium(14), titleColor: .black, cornerRadius: 12, backgroundColor:.blue)
-        b.getCodeSuccess(second: 20, display: "agree") {
-            QMUITips.show(withText: "finish")
-        }
+        b.getCodeSuccess(second: 20, display: "agree", block: nil)
         b.addTarget(self, action: #selector(btnAction(_:)), for: .touchUpInside)
         v.addSubview(b)
         b.snp.makeConstraints { make in
