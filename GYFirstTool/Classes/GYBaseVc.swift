@@ -11,7 +11,7 @@ open class GYBaseVc: UIViewController {
     
     public var pram : [String : Any]?
     
-    @objc public func vc_back() {
+    @objc open func vc_back() {
         if (presentingViewController != nil) {
             dismiss(animated: true)
         } else {

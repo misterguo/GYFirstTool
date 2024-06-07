@@ -11,7 +11,7 @@ open class GYBaseView: UIView {
 
     public var viewBlock:((_ isClose:Bool) -> Void)?
     
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         KJAdaptiveTools.kj_adaptiveViewLayout(withViewXib: self)
     }
